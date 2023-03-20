@@ -1,4 +1,4 @@
-import './details.css';
+import './app.css';
 import arrow from '../assets/left-arrow.png';
 import LocationDetails from '../Components/LocationDetails';
 import { WeatherData } from '../types';
@@ -8,8 +8,8 @@ function Details({ weatherData, handleBackButtonClick }:
 ) {
   return (
     <>
-      <div className='details-row'>
-        <button className='btn' onClick={handleBackButtonClick}>
+      <div className='header-row'>
+        <button onClick={handleBackButtonClick}>
           <img src={arrow} alt='go back' width='20px' height='20px'></img>
         </button>
 

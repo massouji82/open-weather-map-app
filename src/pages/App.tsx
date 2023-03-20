@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
-import { ErrorType, WeatherData } from "../types";
+import { ErrorType, Unit, WeatherData } from "../types";
 import Dashboard from "./Dashboard";
 import Details from "./Details";
 import ErrorPage from "../ErrorPage";
@@ -9,6 +9,7 @@ import ErrorPage from "../ErrorPage";
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
 function App() {
+  const [units, setUnits] = useState<Unit>('metric');
   const [errorObj, setErrorObj] = useState<ErrorType>();
   const [showError, setShowError] = useState(false);
   const [isLoading, setIsloading] = useState(true);
@@ -19,6 +20,10 @@ function App() {
     currentLatitude: 0,
     currentLongitude: 0
   });
+
+  const handleUnitsToggle = () => {
+    setUnits(units => units === 'metric' ? 'imperial' : 'metric');
+  };
 
   const handleLocationSelect = (location: WeatherData['name']) => {
     setSelectedLocation(location);
@@ -83,11 +88,11 @@ function App() {
       let locationsData = [];
 
       try {
-        const currentLocationResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${currentLocationPosition.currentLatitude}&lon=${currentLocationPosition.currentLongitude}&appid=${apiKey}`);
+        const currentLocationResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=${units}&lat=${currentLocationPosition.currentLatitude}&lon=${currentLocationPosition.currentLongitude}&appid=${apiKey}`);
 
-        const rioDeJaneiroResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=-22.908333&lon=-43.196388&appid=${apiKey}`);
+        const rioDeJaneiroResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=${units}&lat=-22.908333&lon=-43.196388&appid=${apiKey}`);
 
-        const londonResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=51.5072&lon=0.1276&appid=${apiKey}`);
+        const londonResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?units=${units}&lat=51.5072&lon=0.1276&appid=${apiKey}`);
 
         locationsData.push(
           currentLocationResponse.data,
@@ -116,7 +121,7 @@ function App() {
     return () => {
       isFirstFetch = false;
     };
-  }, [currentLocationPosition.currentLatitude, currentLocationPosition.currentLongitude, weatherDataFunc]);
+  }, [currentLocationPosition.currentLatitude, currentLocationPosition.currentLongitude, weatherDataFunc, units]);
 
   return (
     <>
@@ -130,6 +135,8 @@ function App() {
               <Dashboard
                 weatherData={weatherData}
                 handleLocationSelect={handleLocationSelect}
+                handleUnitsToggle={handleUnitsToggle}
+                units={units}
               /> : null
             : <Details
               weatherData={weatherData.filter(data => data.name === selectedLocation)[0]}

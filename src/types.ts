@@ -14,3 +14,5 @@ export interface WeatherData {
 }
 
 export type ErrorType = Error | AxiosError;
+
+export type Unit = 'metric' | 'imperial';
