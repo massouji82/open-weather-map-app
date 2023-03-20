@@ -8,19 +8,35 @@ import ErrorPage from "../ErrorPage";
 
 const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
+const unitsInLocalStorage = () => {
+  if (localStorage.getItem("units")) return true;
+  return false;
+};
+
+const currentLocationInLocalStorage = () => {
+  if (localStorage.getItem("currentLocationPosition")) return true;
+  return false;
+};
+
 function App() {
-  const [units, setUnits] = useState<Unit>('metric');
+  const [units, setUnits] = useState<Unit>(
+    unitsInLocalStorage() ?
+      (JSON.parse(localStorage.getItem("units") || "[]")) : "metric"
+  );
   const [errorObj, setErrorObj] = useState<ErrorType>();
   const [showError, setShowError] = useState(false);
   const [isLoading, setIsloading] = useState(true);
-  const [isLoadingUserLocation, setIsloadingUserLocation] = useState(true);
   const [showDashboard, setShowDashboard] = useState(true);
   const [selectedLocation, setSelectedLocation] = useState('');
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
-  const [currentLocationPosition, setCurrentLocationPosition] = useState({
-    currentLatitude: 0,
-    currentLongitude: 0
-  });
+  const [currentLocationPosition, setCurrentLocationPosition] = useState(
+    currentLocationInLocalStorage() ?
+      (JSON.parse(localStorage.getItem("currentLocationPosition") || "[]")) :
+      {
+        currentLatitude: 0,
+        currentLongitude: 0
+      }
+  );
 
   const handleUnitsToggle = () => {
     setUnits(units => units === 'metric' ? 'imperial' : 'metric');
@@ -124,6 +140,14 @@ function App() {
       isFirstFetch = false;
     };
   }, [currentLocationPosition.currentLatitude, currentLocationPosition.currentLongitude, weatherDataFunc, units]);
+
+  useEffect(() => {
+    localStorage.setItem('units', JSON.stringify(units));
+  }, [units]);
+
+  useEffect(() => {
+    localStorage.setItem('currentLocationPosition', JSON.stringify(currentLocationPosition));
+  }, [currentLocationPosition]);
 
   return (
     <>
