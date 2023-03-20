@@ -4,3 +4,10 @@
   align-items: center;
   padding-bottom: 20px;
 }
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+}

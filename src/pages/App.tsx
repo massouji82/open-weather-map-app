@@ -13,6 +13,7 @@ function App() {
   const [errorObj, setErrorObj] = useState<ErrorType>();
   const [showError, setShowError] = useState(false);
   const [isLoading, setIsloading] = useState(true);
+  const [isLoadingUserLocation, setIsloadingUserLocation] = useState(true);
   const [showDashboard, setShowDashboard] = useState(true);
   const [selectedLocation, setSelectedLocation] = useState('');
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
@@ -101,12 +102,15 @@ function App() {
         );
 
         weatherDataFunc(locationsData, setWeatherData);
+
+        setIsloading(false);
       } catch (error) {
         const errors = error as ErrorType;
         if (!axios.isAxiosError(errors)) {
           console.log("Hm something went wrong: ", errors);
         }
         setShowError(true);
+
         setErrorObj(errors);
       }
     };
@@ -116,8 +120,6 @@ function App() {
         .catch(console.error);
     }
 
-    setIsloading(false);
-
     return () => {
       isFirstFetch = false;
     };
@@ -126,7 +128,7 @@ function App() {
   return (
     <>
       {isLoading ?
-        <div>
+        <div className="loading">
           Loading...
         </div> :
         showError ? <ErrorPage error={errorObj!} handleBackButtonClick={handleBackButtonClick} /> :
