@@ -1,10 +1,19 @@
-body {
-  padding: 12px;
+@import url("https://fonts.googleapis.com/css?family=Raleway:500,600,700");
+
+:root {
+  --border-color: rgba(0, 0, 255, 0.2);
+  --details-border: 2px solid var(--border-color);
 }
 
-h1 {
-  font-size: 25px;
-  font-weight: 600;
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Raleway";
+  font-weight: 500;
+  font-size: 18px;
+  font-style: normal;
+  padding: 20px;
 }
 
 button {
@@ -15,4 +24,9 @@ button {
 
 button:focus {
   outline: rgba(0, 0, 255, 0.2) 5px auto;
+}
+
+h1 {
+  font-size: 25px;
+  font-weight: 600;
 }

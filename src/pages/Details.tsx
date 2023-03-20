@@ -1,6 +1,6 @@
 import './details.css';
 import arrow from '../assets/left-arrow.png';
-import WeatherDetails from '../Components/WeatherDetails';
+import LocationDetails from '../Components/LocationDetails';
 import { WeatherData } from '../types';
 
 function Details({ weatherData, handleBackButtonClick }:
@@ -14,13 +14,13 @@ function Details({ weatherData, handleBackButtonClick }:
         </button>
 
         <h1 className='details-header'>
-          Details
+          {weatherData.name}
         </h1>
 
         <div></div>
       </div>
 
-      <WeatherDetails weatherData={weatherData} />
+      <LocationDetails weatherData={weatherData} />
     </>
   );
 }

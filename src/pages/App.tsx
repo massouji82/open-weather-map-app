@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
-import './app.css';
 import { ErrorType, WeatherData } from "../types";
 import Dashboard from "./Dashboard";
 import Details from "./Details";
@@ -42,13 +41,14 @@ function App() {
       weatherDataArray.push({
         currentWeather: location.weather[0].main,
         temp: location.main.temp,
-        tempMax: location.main.temp_min,
-        tempMin: location.main.temp_max,
+        tempMax: location.main.temp_max,
+        tempMin: location.main.temp_min,
         humidity: location.main.humidity,
         sunRise: location.sys.sunrise,
         sunSet: location.sys.sunset,
         icon: location.weather[0].icon,
-        name: location.name === "Abbey Wood" ? "London" : location.name
+        name: location.name === "Abbey Wood" ? "London" : location.name,
+        visibility: location.visibility,
       });
 
       return weatherDataArray;

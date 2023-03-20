@@ -10,6 +10,7 @@ export interface WeatherData {
   sunSet: string,
   icon: string,
   name: string;
+  visibility: number,
 }
 
 export type ErrorType = Error | AxiosError;

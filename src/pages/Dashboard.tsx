@@ -15,8 +15,8 @@ const Dashboard = ({
         {weatherData.map((data, index) => {
           return (
             <div key={index} className='location' onClick={() => handleLocationSelect(data.name)}>
-              {data.name}
-              {data.temp}°C
+              <div style={{ marginRight: "10px" }}>{data.name}</div>
+              <div className='location-temp'>{data.temp}°C</div>
             </div>
           );
         })}
