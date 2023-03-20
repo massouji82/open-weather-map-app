@@ -1,6 +1,7 @@
 import { Unit, WeatherData } from '../types';
 import './dashboard.css';
 import './app.css';
+import { checkUnits } from '../helpers';
 
 const Dashboard = ({
   weatherData, units, handleLocationSelect, handleUnitsToggle }:
@@ -15,7 +16,7 @@ const Dashboard = ({
     <>
       <div className='header-row'>
         <button className='units-btn' onClick={handleUnitsToggle}>
-          {units === 'imperial' ? '°F' : '°C'}
+          {checkUnits(units)}
         </button>
 
         <h1>
@@ -39,7 +40,7 @@ const Dashboard = ({
                 >
                   <div style={{ marginRight: "10px" }}>{data.name}</div>
 
-                  <div className='location-temp'>{data.temp}°C</div>
+                  <div className='location-temp'>{data.temp}{checkUnits(units)}</div>
                 </div>
               }
             </>

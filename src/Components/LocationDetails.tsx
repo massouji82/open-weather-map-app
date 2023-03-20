@@ -1,17 +1,8 @@
 import './locationDetails.css';
-import { WeatherData } from "../types";
+import { Unit, WeatherData } from "../types";
+import { checkUnits, timeExtractor } from '../helpers';
 
-const timeExtractor = (rise: any, set: any) => {
-  let sunRise = new Date(rise as any * 1000);
-  let sunSet = new Date(set as any * 1000);
-
-  return {
-    rise: sunRise.toLocaleTimeString("en-GB"),
-    set: sunSet.toLocaleTimeString("en-GB")
-  };
-};
-
-const LocationDetails = ({ weatherData: { currentWeather, temp, tempMax, tempMin, humidity, sunRise, sunSet, icon, visibility } }: { weatherData: WeatherData; }) => {
+const LocationDetails = ({ weatherData: { currentWeather, temp, tempMax, tempMin, humidity, sunRise, sunSet, icon, visibility }, units }: { weatherData: WeatherData; units: Unit; }) => {
   const { rise, set } = timeExtractor(sunRise, sunSet);
 
   return (
@@ -20,7 +11,7 @@ const LocationDetails = ({ weatherData: { currentWeather, temp, tempMax, tempMin
         <div className='icon-container'>
           <span className='weather-description'>{currentWeather}</span>
 
-          <span className='temperature'>{Math.ceil(temp)}°C</span>
+          <span className='temperature'>{Math.ceil(temp)}{checkUnits(units)}</span>
 
           <img
             className='icon'
@@ -31,11 +22,11 @@ const LocationDetails = ({ weatherData: { currentWeather, temp, tempMax, tempMin
 
         <div className='temperature-row'>
           <div style={{ marginRight: "20px" }}>
-            Max: <span className='text'>{Math.ceil(tempMax)}°C</span>
+            Max: <span className='text'>{Math.ceil(tempMax)}{checkUnits(units)}</span>
           </div>
 
           <div>
-            Min: <span className='text'>{Math.ceil(tempMin)}°C</span>
+            Min: <span className='text'>{Math.ceil(tempMin)}{checkUnits(units)}</span>
           </div>
         </div>
       </div>

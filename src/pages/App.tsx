@@ -167,6 +167,7 @@ function App() {
             : <Details
               weatherData={weatherData.filter(data => data.name === selectedLocation)[0]}
               handleBackButtonClick={handleBackButtonClick}
+              units={units}
             />
       }
     </>

@@ -1,10 +1,10 @@
 import './app.css';
 import arrow from '../assets/left-arrow.png';
 import LocationDetails from '../Components/LocationDetails';
-import { WeatherData } from '../types';
+import { Unit, WeatherData } from '../types';
 
-function Details({ weatherData, handleBackButtonClick }:
-  { weatherData: WeatherData, handleBackButtonClick: () => void; }
+function Details({ weatherData, units, handleBackButtonClick }:
+  { weatherData: WeatherData, units: Unit, handleBackButtonClick: () => void; }
 ) {
   return (
     <>
@@ -20,7 +20,7 @@ function Details({ weatherData, handleBackButtonClick }:
         <div></div>
       </div>
 
-      <LocationDetails weatherData={weatherData} />
+      <LocationDetails weatherData={weatherData} units={units} />
     </>
   );
 }
