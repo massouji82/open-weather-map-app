@@ -2,7 +2,13 @@
 
 In the project directory, you can run:
 
+### `yarn`
+
+to install the packages followed by:
+
 ### `yarn start`
+
+to start the local server.
 
 This was a fun challenge! It was a bit more time consuming than I expected but as as long as I learn
 something new it is always worth it :D
