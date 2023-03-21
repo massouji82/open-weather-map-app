@@ -1,4 +1,4 @@
-# OpenWeatherMap Weather App
+# OpenWeatherMap App
 
 In the project directory, you can run:
 
