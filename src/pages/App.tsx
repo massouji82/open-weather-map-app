@@ -123,7 +123,8 @@ function App() {
       } catch (error) {
         const errors = error as ErrorType;
         if (!axios.isAxiosError(errors)) {
-          console.log("Hm something went wrong: ", errors);
+          // do something meaningful
+          // console.error("Hm something went wrong: ", errors);
         }
         setShowError(true);
 
