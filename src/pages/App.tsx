@@ -82,7 +82,6 @@ function App() {
   localStorage.clear();
 
   useEffect(() => {
-    console.log("use");
     if (navigator.geolocation) {
       navigator.geolocation.watchPosition(position => {
         setCurrentLocationPosition({
