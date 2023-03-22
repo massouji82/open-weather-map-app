@@ -1,6 +1,6 @@
-import { Unit } from "./types";
+import { Unit, WeatherData } from "./types";
 
-export function timeExtractor(rise: any, set: any) {
+export function timeExtractor(rise: WeatherData['sunRise'], set: WeatherData['sunSet']) {
   let sunRise = new Date(rise as any * 1000);
   let sunSet = new Date(set as any * 1000);
 

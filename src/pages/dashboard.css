@@ -1,6 +1,7 @@
 @media (max-width: 62rem) {
   .locations {
-    display: inline;
+    display: flex;
+    flex-direction: column;
   }
   .location:nth-of-type(even) {
     margin-top: 12px;
@@ -35,6 +36,12 @@
   flex-grow: 1;
   height: 60px;
   cursor: pointer;
+}
+
+.locations {
+  display: flex;
+  flex-grow: 1;
+  min-width: 100%;
 }
 
 .location-temp {

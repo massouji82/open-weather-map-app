@@ -79,22 +79,29 @@ function App() {
     setState(weatherDataArray);
   }, []);
 
-  useEffect(() => {
-    if (!navigator.geolocation) {
-      alert("Geolocation is not supported by your browser!");
+  localStorage.clear();
 
-      setCurrentLocationPosition({
-        // hardcoded lat lon of Oslo
-        currentLatitude: 59.9139,
-        currentLongitude: 10.7522
-      });
-    } else {
-      navigator.geolocation.getCurrentPosition(position => {
+  useEffect(() => {
+    console.log("use");
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition(position => {
         setCurrentLocationPosition({
           currentLatitude: position.coords.latitude,
           currentLongitude: position.coords.longitude
         });
-      });
+      },
+        error => {
+          console.log("1111");
+          if (error.code === error.PERMISSION_DENIED) alert("You denied tracking :(");
+
+          setCurrentLocationPosition({
+            // hardcoded lat lon of Oslo
+            currentLatitude: 59.9139,
+            currentLongitude: 10.7522
+          });
+        });
+    } else {
+      alert("Geolocation is not supported by your browser!");
     }
   }, []);
 

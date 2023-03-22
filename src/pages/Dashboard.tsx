@@ -2,6 +2,7 @@ import { Unit, WeatherData } from '../types';
 import './dashboard.css';
 import './app.css';
 import { checkUnits } from '../helpers';
+import { Fragment } from 'react';
 
 const Dashboard = ({
   weatherData, units, handleLocationSelect, handleUnitsToggle }:
@@ -29,21 +30,20 @@ const Dashboard = ({
       <div className='locations'>
         {weatherData.map((data, index) => {
           return (
-            <div key={index} className='location'>
+            <Fragment key={index}>
               {data.name === "Globe" ?
                 <div className='loading-location'>
                   Loading your location...
                 </div> :
-                <div
-
+                <button
                   className='location' onClick={() => handleLocationSelect(data.name)}
                 >
                   <div style={{ marginRight: "10px" }}>{data.name}</div>
 
                   <div className='location-temp'>{data.temp}{checkUnits(units)}</div>
-                </div>
+                </button>
               }
-            </div>
+            </Fragment>
           );
         })}
       </div>
