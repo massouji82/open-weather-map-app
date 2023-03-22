@@ -90,7 +90,6 @@ function App() {
         });
       },
         error => {
-          console.log("1111");
           if (error.code === error.PERMISSION_DENIED) alert("You denied tracking :(");
 
           setCurrentLocationPosition({
